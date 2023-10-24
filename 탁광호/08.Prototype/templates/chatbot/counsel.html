@@ -114,9 +114,9 @@
                         const realEstateScamButtons = [
                             { text: '허위 매물 사기', id: 'CamouflagedPropertyFraud', action: function() { createBootstrapCardWithButtons('허위 매물 사기'); }  },
                             { text: '가격 조작 사기', id: 'PriceManipulationFraud', action: function() { createBootstrapCardWithButtons('가격 조작 사기'); } },
-                            { text: '전세사기', id: 'JeonseFraud' },
-                            { text: '임대차계약사기', id: 'RentalContractFraud' },
-                            { text: '부동산 투자사기', id: 'RealEstateInvestmentFraud' },
+                            { text: '전세 사기', id: 'JeonseFraud', action: function() { createBootstrapCardWithButtons('전세 사기'); } },
+                            { text: '임대차 계약 사기', id: 'RentalContractFraud', action: function() { createBootstrapCardWithButtons('임대차 계약 사기'); } },
+                            { text: '부동산 투자 사기', id: 'RealEstateInvestmentFraud', action: function() { createBootstrapCardWithButtons('부동산 투자 사기'); } },
                         ];
                         createButtonWithDropdown(buttonContainer, 'RealEstateScam', '부동산 사기 유형', 'btn-warning', realEstateScamButtons);
 
@@ -134,20 +134,37 @@
                         let buttons;
                         let cardTitleText; 
                         
-                        const priceManipulationFraudButtons = [
-                            { text: '1. 목적, 방식, 특징', id: 'DefinitionAndExamples' },
-                            { text: '2. 피해 방지 방법', id: 'PreventionMethods' },
-                            // ... 기타 필요한 버튼들을 추가
-                        ];
-
+                        
+                        
                         const camouflagedPropertyFraudButtons = [
                             { text: '1. 목적, 방식, 특징', id: 'DefinitionAndExamples' },
                             { text: '2. 피해 방지 방법', id: 'PreventionMethods' },
                             // ... 기타 필요한 버튼들을 추가
                         ];
+                        
+                        const priceManipulationFraudButtons = [
+                            { text: '1. 목적, 방식, 특징', id: 'DefinitionAndExamples' },
+                            { text: '2. 피해 방지 방법', id: 'PreventionMethods' },
+                            // ... 기타 필요한 버튼들을 추가
+                        ];
+                        
+                        const JeonseFraudButtons = [
+                            { text: '1. 목적, 방식, 특징', id: 'DefinitionAndExamples' },
+                            { text: '2. 피해 방지 방법', id: 'PreventionMethods' },
+                            // ... 기타 필요한 버튼들을 추가
+                        ];
 
-                       
+                        const RentalContractFraudButtons = [
+                            { text: '1. 목적, 방식, 특징', id: 'DefinitionAndExamples' },
+                            { text: '2. 피해 방지 방법', id: 'PreventionMethods' },
+                            // ... 기타 필요한 버튼들을 추가
+                        ];
 
+                        const RealEstateInvestmentFraudButtons = [
+                            { text: '1. 목적, 방식, 특징', id: 'DefinitionAndExamples' },
+                            { text: '2. 피해 방지 방법', id: 'PreventionMethods' },
+                            // ... 기타 필요한 버튼들을 추가
+                        ];
 
                         const jeonseButtons = [
                             { text: '1. 정의', id: 'Definition' },
@@ -189,7 +206,15 @@
                         } else if (type === '가격 조작 사기') {
                             buttons = priceManipulationFraudButtons;
                             cardTitleText = '가격 조작 사기';
-                            
+                        } else if (type === '전세 사기') {
+                            buttons = JeonseFraudButtons;
+                            cardTitleText = '전세 사기';
+                        } else if (type === '임대차 계약 사기') {
+                            buttons = RentalContractFraudButtons;
+                            cardTitleText = '임대차 계약 사기';
+                        } else if (type === '부동산 투자 사기') {
+                            buttons = RentalContractFraudButtons;
+                            cardTitleText = '부동산 투자 사기';
                         } else {
                             console.error("Unknown type provided to createBootstrapCardWithButtons:", type);
                             return;
@@ -252,6 +277,12 @@
                             details = camouflagedPropertyFraudDetails;
                         } else if (type === '가격 조작 사기') {
                             details = priceManipulationFraudDetails;
+                        } else if (type === '전세 사기') {
+                            details = JeonseFraudDetails;
+                        } else if (type === '임대차 계약 사기') {
+                            details = RentalContractFraudDetails;
+                        } else if (type === '부동산 투자 사기') {
+                            details = RealEstateInvestmentFraudDetails;
                         } else {
                             console.error('Invalid type provided');
                             return;
@@ -295,15 +326,83 @@
 
 
                     const camouflagedPropertyFraudDetails = {
-                            'DefinitionAndExamples': '허위 매물 사기 (위장 매물 사기) : <br><br>목적 : 주로 보증금이나 중개수수료를 챙기기 위해 진행됩니다.<br><br>방식 : 존재하지 않는 부동산을 실제로 거래 가능한 매물인 것처럼 광고하거나, 이미 다른 사람에게 팔린 또는 임대된 부동산을 광고합니다.<br><br>특징 : 구매자나 세입자를 유인하여 금전을 편취하고 사라집니다.',
-                            'PreventionMethods': '1. 매물 직접 확인<br>광고된 매물이 실제로 존재하는지 직접 방문하여 확인합니다.<br><br>2. 서류와 중개업소 확인<br>매물의 등기부등본을 확인하여 소유권과 권리 관계를 확인합니다.<br>거래를 진행하는 부동산 중개업소가 정식으로 등록되어 있는지 확인합니다.<br><br>3. 계약서 작성 및 보관<br>모든 계약 조건을 명확하게 기록한 계약서를 작성하고, 원본과 복사본을 각각 보관합니다.<br><br>4. 신중한 거래<br>급하게 거래를 서두르는 경우 추가적인 확인이 필요합니다.<br>보증금과 중개수수료는 계약이 체결된 후, 계약서에 명시된 계좌로만 지불합니다.<br>',
-                            // ... 기타 필요한 상세 정보를 추가
-                        };
+                        'DefinitionAndExamples': '허위 매물 사기 (위장 매물 사기)  <br><br>1. 목적<br>주로 보증금이나 중개수수료를 챙기기 위해 진행됩니다.<br><br>2. 방식 <br>존재하지 않는 부동산을 실제로 거래 가능한 매물인 것처럼 광고하거나, 이미 다른 사람에게 팔린 또는 임대된 부동산을 광고합니다.<br><br>3. 특징 <br>구매자나 세입자를 유인하여 금전을 편취하고 사라집니다.',
+                        'PreventionMethods': '1. 매물 직접 확인<br>광고된 매물이 실제로 존재하는지 직접 방문하여 확인합니다.<br><br>2. 서류와 중개업소 확인<br>매물의 등기부등본을 확인하여 소유권과 권리 관계를 확인합니다.<br>거래를 진행하는 부동산 중개업소가 정식으로 등록되어 있는지 확인합니다.<br><br>3. 계약서 작성 및 보관<br>모든 계약 조건을 명확하게 기록한 계약서를 작성하고, 원본과 복사본을 각각 보관합니다.<br><br>4. 신중한 거래<br>급하게 거래를 서두르는 경우 추가적인 확인이 필요합니다.<br>보증금과 중개수수료는 계약이 체결된 후, 계약서에 명시된 계좌로만 지불합니다.<br>',
+                        // ... 기타 필요한 상세 정보를 추가
+                    };
 
                     const priceManipulationFraudDetails = {
-                        'DefinitionAndExamples': '가격 조작 사기 :<br><br>목적 : 부동산의 가격을 부풀리거나 낮추어 표시함으로써 부당한 이득을 취하는 것이 주 목적입니다.<br><br>방식 : 실제 부동산의 시장 가치와는 다르게 가격을 조작하여 거래합니다. 이는 허위의 정보 제공, 부정확한 감정 평가 등을 포함할 수 있습니다.<br><br>특징 : 부동산을 고가에 팔거나 저가에 매입한 후 재판매하여 이익을 취합니다.',
-                        'PreventionMethods': '1. 감정 평가 <br>부동산의 시장 가치를 정확히 파악하기 위해 전문가의 감정 평가를 받습니다.<br><br>2. 등기부등본 확인<br>부동산의 소유권과 권리 관계를 확인합니다.<br><br>3. 비교 분석 <br>유사한 매물의 가격과 조건을 비교하여 정상적인 거래 가격을 파악합니다.<br><br>4. 신중한 결정 <br>부동산 투자와 관련된 결정은 신중하게 하며, 과장된 홍보나 압박에 휘둘리지 않습니다.',
+                        'DefinitionAndExamples': '가격 조작 사기 <br><br>1. 목적 <br><span style="color: orange;"><strong>부당 이득 취득 : </strong></span> 부동산의 가격을 부풀리거나 낮추어 표시함으로써 부당한 이득을 취하는 것이 주 목적입니다.<br><br>2. 방식<br><span style="color: orange;"><strong>가격 조작 : </strong></span> 실제 부동산의 시장 가치와는 다르게 가격을 조작하여 거래합니다. 이는 허위의 정보 제공, 부정확한 감정 평가 등을 포함할 수 있습니다.<br><br>3. 특징<br><span style="color: orange;"><strong>고가 판매 및 저가 매입 : </strong></span> 부동산을 고가에 팔거나 저가에 매입한 후 재판매하여 이익을 취합니다.',
+                        'PreventionMethods': `
+                        1. 시장 가격 비교<br>
+                        <span style="color: orange;"><strong>다양한 출처에서 가격 정보 수집 :</strong></span> 주변 지역의 부동산 가격과 비교하여 해당 부동산의 가격이 적정한지 판단합니다.<br>
+                        <span style="color: orange;"><strong>공시지가 확인 :</strong></span> 정부에서 공시한 지가를 확인하여 부동산의 가치를 객관적으로 판단합니다.<br><br>
+                        2. 부동산 전문가의 조언 구하기<br>
+                        <span style="color: orange;"><strong>감정평가사나 부동산 중개인의 도움 받기 :</strong></span> 부동산의 시장 가치를 정확히 평가하기 위해 전문가의 도움을 받습니다.<br><br>
+                        3. 투명한 거래 내역 요구<br>
+                        <span style="color: orange;"><strong>거래 내역의 투명성 확인 :</strong></span> 판매자나 중개인에게 이전 거래 내역을 요구하여 가격 변동의 이유를 확인합니다.<br><br>
+                        4. 계약서 꼼꼼히 검토<br>
+                        <span style="color: orange;"><strong>계약서의 모든 조항 확인 :</strong></span> 계약서에 기재된 가격, 조건 등이 정확한지 꼼꼼히 검토합니다.<br>
+                        <span style="color: orange;"><strong>위반 시 조치 사항 명시 :</strong></span> 가격 조작이 발견될 경우 계약을 해제하거나 손해배상을 요구할 수 있는 조항을 포함합니다.
+                        `,// ... 기타 필요한 상세 정보를 추가
+                    };
+
+                    const JeonseFraudDetails = {
+                        'DefinitionAndExamples': `전세 사기 <br><br>
+                        1. 목적 <br>
+                        <span style="color: orange;"><strong>금전 편취 :</strong></span> 세입자로부터 전세금을 받아 챙기고, 나중에는 반환하지 않는 것이 주된 목적입니다.<br>
+                        <span style="color: orange;"><strong>여러 차례 전세금 받기 :</strong></span> 같은 부동산에 대해 여러 명의 세입자와 전세 계약을 체결하고, 각각으로부터 전세금을 받아 챙깁니다.<br><br>
+                        2. 방식 <br>
+                        <span style="color: orange;"><strong>허위 매물 광고 :</strong></span> 존재하지 않거나 이미 다른 세입자가 있는 부동산을 전세 매물로 광고합니다.<br>
+                        <span style="color: orange;"><strong>가짜 임대인 :</strong></span> 실제 임대인이 아닌 사람이 임대인 행세를 하며 전세 계약을 체결합니다.<br>
+                        <span style="color: orange;"><strong>중복 계약 :</strong></span> 동일한 부동산에 대해 여러 명의 세입자와 전세 계약을 체결합니다.<br>
+                        <span style="color: orange;"><strong>전세금 반환 거부 :</strong></span> 계약기간이 끝나도 전세금을 돌려주지 않고 다양한 이유를 대며 거부합니다.<br><br>
+                        3. 특징 <br>
+                        <span style="color: orange;"><strong>신속한 거래 유도 :</strong></span> 사기범은 피해자가 충분히 검토하지 못하도록 거래를 서두릅니다.<br>
+                        <span style="color: orange;"><strong>저렴한 가격 설정 :</strong></span> 시세보다 훨씬 낮은 가격을 제시하여 세입자의 관심을 끕니다.<br>
+                        <span style="color: orange;"><strong>계약서 미비 :</strong></span> 정식 계약서를 작성하지 않거나, 계약서에 중요한 조항이 빠져 있습니다.<br>
+                        <span style="color: orange;"><strong>현금 거래 선호 :</strong></span> 통장 이체나 수표 대신 현금 거래를 선호하며, 계약금이나 전세금을 현금으로 요구합니다.`,
+                        'PreventionMethods': '1. 적정 전세가격 확인하기<br>2. 전세가율 확인하기<br>3. 등기부등본 확인하기<br>4. 건축물대장 확인하기<br>5. 임대인 체납세금 등 확인하기<br>6. 공인중개사 및 집주인 확인하기<br>7. 중개물건 등록 확인하기<br>8. 보증보험 확인하기',
                         // ... 기타 필요한 상세 정보를 추가
+                    };
+
+
+                    const RentalContractFraudDetails = {
+                        'DefinitionAndExamples': '임대차 계약 사기<br><br>1. 목적<br><span style="color: orange;"><strong>금전 편취 : </strong></span>임대인 혹은 세입자로부터 보증금, 월세, 중개수수료 등의 금액을 부당하게 취득하는 것을 목적으로 합니다.<br><br>2. 방식<br><span style="color: orange;"><strong>허위 매물 광고 : </strong></span>실제로는 존재하지 않거나 이미 임대된 부동산을 새로운 매물로 광고하여 세입자를 유인합니다.<br><span style="color: orange;"><strong>가짜 임대인/세입자 행세 : </strong></span>임대인이나 세입자가 아닌 사람이 해당 행세를 하여 계약을 체결합니다.<br><span style="color: orange;"><strong>중복 계약 : </strong></span>동일한 부동산에 대해 여러 세입자와 계약을 체결하여 여러 차례 보증금이나 월세를 받아냅니다.<br><span style="color: orange;"><strong>부당한 계약조건 : </strong></span>계약서에 세세한 조건이나 파손에 대한 비용 부과 등 불리한 조항을 명시하거나 숨겨 세입자에게 불이익을 주려는 경우도 있습니다.<br><br>3. 특징<br><span style="color: orange;"><strong>신속한 거래 유도 : </strong></span>사기범은 피해자가 계약 내용을 충분히 검토하거나 다른 선택지를 찾지 못하도록 거래를 서두르는 경향이 있습니다.<br><span style="color: orange;"><strong>정보 불투명성 : </strong></span>사기범은 자신의 신분, 부동산에 관한 정보, 계약 조건 등에 관하여 투명하게 공개하려 하지 않습니다.<br><span style="color: orange;"><strong>저렴한 가격 설정 : </strong></span>시세보다 현저히 낮은 금액을 제시하여 세입자의 관심을 끕니다.<br><span style="color: orange;"><strong>계약서 미비 : </strong></span>제대로 된 계약서를 작성하지 않거나, 계약서에 중요한 조항이 빠져 있을 수 있습니다.',
+                        'PreventionMethods': '1. 철저한 정보 확인<br>부동산의 등기부등본 조회를 통해 실제 소유자를 확인하고, 부동산에 실제 거주 중인 사람과의 대화를 통해 현재 상황을 파악합니다.<br>계약 상대방의 신분증을 확인하여 실제 임대인 또는 세입자인지 확인합니다.<br><br>2. 계약서 상세 검토<br>계약서의 모든 조항을 꼼꼼히 읽고, 특히 보증금 반환 조항, 임대 기간, 월세 금액, 관리비 등의 중요한 부분을 철저히 확인합니다.<br><br>3. 임대차보증금 반환보증 가입<br>임대인이 보증금을 반환하지 않을 때를 대비해 임대차보증금 반환보증에 가입합니다.<br><br>4. 안전한 거래<br>계약금과 보증금은 계좌 이체를 통해 거래하고, 모든 거래 내역을 잘 보관합니다.<br>가능한 한 정식 등록된 부동산 중개업소를 이용합니다.',
+                        // ... 기타 필요한 상세 정보를 추가
+                    };
+
+
+
+                    const RealEstateInvestmentFraudDetails = {
+                        'DefinitionAndExamples': `부동산 투자 사기<br><br>
+                            1. 목적<br>
+                            <span style="color: orange;"><strong>금전 편취 : </strong></span>투자자들로부터 직접 돈을 받거나 투자금을 가로채는 것이 주요 목적입니다.<br>
+                            <span style="color: orange;"><strong>투자 유치 :</strong></span> 부정직한 방법으로 부동산 프로젝트나 기회에 대해 투자를 유치합니다.<br><br>
+                            2. 방식<br>
+                            <span style="color: orange;"><strong>과장된 수익 예측 : </strong></span>부동산의 가치 상승이나 임대 수익 등을 과장하여 투자자들을 유혹합니다.<br>
+                            <span style="color: orange;"><strong>허위 정보 제공 : </strong></span>존재하지 않는 부동산, 미래 개발 계획 등 허위의 정보를 제공합니다.<br>
+                            <span style="color: orange;"><strong>높은 수수료 요구 : </strong></span>투자에 참여하기 위해 높은 수수료나 초기 투자금을 요구합니다.<br>
+                            <span style="color: orange;"><strong>다단계 투자 유치 : </strong></span>기존 투자자들에게 새로운 투자자를 유치하도록 하여 피라미드 형태의 구조를 만듭니다.<br>
+                            <span style="color: orange;"><strong>빠른 투자 결정 강요 : </strong></span>투자 기회가 한정되어 있고, 빠르게 결정해야 한다며 압박합니다.<br><br>
+                            3. 특징<br>
+                            <span style="color: orange;"><strong>정보의 불투명성 : </strong></span>정확하고 투명한 정보 제공이 부족하며, 투자와 관련된 리스크에 대해 언급하지 않습니다.<br>
+                            <span style="color: orange;"><strong>압박적인 판매 전략 : </strong></span>투자자들이 신중하게 판단할 시간을 주지 않고, 빠른 결정을 강요합니다.<br>
+                            <span style="color: orange;"><strong>높은 수익률 약속 : </strong></span>시장 평균을 웃도는 높은 수익률을 약속하여 투자자들의 관심을 끕니다.<br>
+                            <span style="color: orange;"><strong>사후 서비스 부재 : </strong></span>일단 투자금을 받고 나면, 사기범들은 연락을 끊고 사라질 가능성이 높습니다.`,
+                            'PreventionMethods': `
+                            1. 철저한 정보 확인<br>
+                            <span style="color: orange;"><strong>부동산 및 프로젝트 정보 확인 :</strong></span> 부동산의 등기부등본, 토지 이용 계획 등 공식 문서를 통해 정보를 확인합니다.<br>
+                            <span style="color: orange;"><strong>수익 예측의 근거 검토 :</strong></span> 예상 수익률과 그 근거를 신중하게 검토합니다.<br><br>
+                            2. 전문가의 조언 구하기<br>
+                            <span style="color: orange;"><strong>변호사나 부동산 전문가와 상담 :</strong></span> 계약서 검토, 투자 리스크 평가 등을 위해 전문가의 도움을 받습니다.<br><br>
+                            3. 압박에 굴하지 않기<br>
+                            <span style="color: orange;"><strong>신중한 판단과 결정 :</strong></span> 압박적인 판매 전략에 굴하지 않고, 충분한 시간을 가지고 신중하게 판단합니다.<br><br>
+                            4. 안전한 거래 방법 선택<br>
+                            <span style="color: orange;"><strong>투자금의 안전한 이체 :</strong></span> 계약금 및 투자금은 안전한 방법으로 이체하고, 모든 거래 내역을 잘 보관합니다.
+                            `,
+                            // ... 기타 필요한 상세 정보를 추가
                     };
 
 
@@ -336,24 +435,28 @@
 {% block subtitle %}사회초년생을 위한 챗봇{% endblock %}
 {% block content %}
         
-        <div class="d-flex justify-content-center outer-container" style="margin-top: 80px;">
-            <div class="container overflow-auto" id="container" style="width: 80%; height: 350px;">
-                <!-- 초기 환영 메시지는 이 부분에 직접 추가 -->
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div class="outer-container overflow-auto" id="container" style="height: 400px; margin-top: 80px;">
+                    <!-- 초기 환영 메시지는 이 부분에 직접 추가 -->
+                </div>
             </div>
         </div>
-  
 
-        <div class="d-flex justify-content-center outer-container" style="margin-top: 10px;">
-            <div class="input-group mb-3" style="width: 80%;">
-                <input type="text" class="form-control" name="userInput" id="userInput" onkeyup="if(window.event.keyCode==13) {send()}"
-                    onfocus="if(this.value=='문의할 내용을 적어주세요') { this.value=''; this.style.opacity = 1; }"
-                    onblur="if(this.value=='') { this.value='문의할 내용을 적어주세요'; this.style.opacity = 0.7; }"
-                    placeholder="문의할 내용을 적어주세요">
-                <button class="btn btn-success" type="submit" onclick="send()">전송</button>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-10 mx-auto">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control custom-input" name="userInput" id="userInput" onkeyup="if(window.event.keyCode==13) {send()}"
+                        onfocus="if(this.value=='문의할 내용을 적어주세요') { this.value=''; this.style.opacity = 1; }"
+                        onblur="if(this.value=='') { this.value='문의할 내용을 적어주세요'; this.style.opacity = 0.7; }"
+                        placeholder="문의할 내용을 적어주세요">
+                    <button class="btn btn-success" type="submit" onclick="send()">전송</button>
+                </div>
             </div>
         </div>
+
+    
     <script>
-       
         
         function clearDefaultText() {
             var userInput = document.getElementById("userInput");
