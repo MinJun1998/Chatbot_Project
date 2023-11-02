@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 chatbot_bp = Blueprint('chatbot_bp', __name__)
 
-menu = {'ho':0, 'us':0, 'cr':0, 'ma':0, 'cb':1, 'sc':0}
+menu = {'ho':0, 'ol':1, 'ba':0, 'fr':0, 'mp':0 }
 
 
 
@@ -15,7 +15,7 @@ menu = {'ho':0, 'us':0, 'cr':0, 'ma':0, 'cb':1, 'sc':0}
 def before_app_first_request():
     global model, wdf
     model = SentenceTransformer('jhgan/ko-sroberta-multitask')
-    filename = os.path.join(current_app.static_folder, 'data/test_부동산_dataset.csv')
+    filename = os.path.join(current_app.static_folder, 'data/1030_0355data.csv')
     wdf = pd.read_csv(filename)
     wdf.embedding = wdf.embedding.apply(json.loads)
     print('Wellness initialization is done.')
@@ -30,10 +30,19 @@ def counsel():
         user_input = request.form['userInput']
         embedding = model.encode(user_input)
         wdf['유사도'] = wdf.embedding.map(lambda x: cosine_similarity([embedding],[x]).squeeze())
+ # 최종점수를 유사도와 동일하게 설정
+
         answer = wdf.loc[wdf.유사도.idxmax()]
+
         result = {
-            'category':answer.구분, 'user':user_input, 'chatbot':answer.챗봇, 'similarity':answer.유사도
+            'category': answer.구분,
+            'user': user_input,
+            'chatbot': answer.챗봇,
+            'similarity': answer.유사도,
+            'final_score': answer.유사도  # 최종점수를 유사도와 동일하게 설정
         }
+    
+
         return json.dumps(result)
     
 @chatbot_bp.route('/get_welcome_message', methods=['GET'])
