@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+
+
+{% block subtitle %}
+    <div style="margin-left: 200px;">허위 매물 사기</div>    
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="left-container" style="position: relative; float: left; width: 200px;">
+        <h3 style="position: relative; left: -40px;">기초사전</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px; ">
+            <ul>
+                <li class="underlined-text"><a href="../dictionary/jeonse">전 세</a></li>
+                <li class="underlined-text"><a href="../dictionary/wolse">월 세</a></li>
+                <li><a href="../dictionary/tip">팁</a></li>
+            </ul>
+        </div>
+        <h3 style="position: relative; left: -40px; top: 30px;">사기유형</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px; top: 30px;">
+            <ul>
+                <li class="underlined-text active" style="font-size: 100%;"><a href="#">허위 매물 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="priceManipulation">가격 조작 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="JeonseFraud">전세 사기</a></li>
+                <li style="font-size: 100%;"><a href="RentalContract">임대차 계약 사기</a></li>
+            </ul>
+        </div>  
+    </div>
+    <div class="right-container" style="margin-top: 50px;">
+        <div class="col-md-12 mx-auto; row top-div" style="margin-left: 200px; line-height: 1.5; width: 924px; font-weight: 600; font-size: 18px;">
+            <table class="type09">
+                <thead>
+                <tr>
+                  <th scope="cols"></th>
+                  <th scope="cols"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row" rowspan="3" style="text-align: center;">유형</th>
+                  <td>1. 존재하지 않는 부동산 소유권이나 임대권을 가장하는 경우<br>2. 실제 부동산의 가격과 현저히 다른 가격을 제시하는 경우<br>3. 가짜 계약서, 서류, 사진 등을 사용하여 실제로는 존재하지 않는 부동산을 양도하려는 경우</td>
+                </tr>          
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">예방법</th>
+                      <td>1. 부동산 거래 시에는 중개사나 부동산 업체의 신뢰성을 확인하고,<br>허위 매물 정보를 검증해야 합니다.<br>2. 모든 거래는 상세한 계약서에 기록되어야 하며, 관련 정보 및 합의 사항을<br>문서로 남기는 것이 중요합니다.<br>3. 부동산 거래 중간에 나타나는 어떤 의심스러운 부분도 무시하지 말고 신속하게 조사하고,<br>필요하면 관할 경찰서나 부동산 규제 기관에 신고하세요.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">법적 처벌</th>
+                      <td>1. 허위 매물을 사용하여 사기를 치는 행위는 법적으로 처벌받을 수 있으며,<br> 사기죄로 기소될 수 있습니다.<br>2. 처벌에 따라 금전적 제재나 형사 처벌이 가해질 수 있으며,<br> 금전적 손실을 입은 피해자는 법적인 소송을 제기할 수도 있습니다.</td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

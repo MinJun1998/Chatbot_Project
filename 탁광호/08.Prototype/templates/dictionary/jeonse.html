@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+
+
+{% block subtitle %}
+    <div style="margin-left: 200px;">전세</div>    
+{% endblock %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 50px;">
+    <div class="left-container" style="position: relative; float: left; width: 200px;">
+        <h3 style="position: relative; left: -40px;">기초사전</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px;">
+          <ul>
+            <li class="underlined-text active"><a href="#">전 세</a></li>
+            <li class="underlined-text"><a href="wolse">월 세</a></li>
+            <li><a href="tip">팁</a></li>
+          </ul>
+        </div>
+        <h3 style="position: relative; left: -40px; top: 30px;">사기유형</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px; top: 30px;">
+            <ul>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/camouflagedProperty">허위 매물 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/priceManipulation">가격 조작 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/JeonseFraud">전세 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/RentalContract">임대차 계약 사기</a></li>
+            </ul>
+        </div>  
+    </div>
+    <div class="right-container">
+        <div class="col-md-12 mx-auto; row top-div" style="margin-left: 200px; line-height: 1.5; width: 924px; font-weight: 600; font-size: 18px;">
+            <table class="type09">
+                <thead>
+                <tr>
+                  <th scope="cols"></th>
+                  <th scope="cols"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row" rowspan="3" style="text-align: center;">전세</th>
+                  <td>임대인이 임차인에게 주택을 일정 기간 사용하게 하고,<br>임차인은 그 대가로 임대인에게 일정 금액을 미리 지급하는 계약 방식입니다.</td>
+                </tr>          
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">전세금</th>
+                      <td>임차인은 계약 시 임대인에게 전세금을 지급합니다. 이 금액은 임대 기간 동안 반환받지 않습니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">계약 기간</th>
+                      <td>전세 계약의 기간은 일반적으로 2년이며, 계약 만료 시 재계약 또는 계약 해지가 가능합니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">계약서</th>
+                      <td>계약 내용을 명확하게 서면으로 작성해야 합니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="4" style="text-align: center;">계약 해지</th>
+                      <td>계약 기간 중 해지할 경우, 반드시 그 이유와 조건을 명시해야 합니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">계약금</th>
+                      <td>전체 전세금의 일부를 미리 지불하며, 나머지는 계약 이행 시 지불됩니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">전세금 반환</th>
+                      <td>계약 만료 시 임차인은 임대인으로부터 전세금 전액을 반환받아야 합니다. <br>만약 임대인이 전세금을 반환하지 않을 경우, 임차인은 법적 조치를 취할 수 있습니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">전세 대출</th>
+                      <td>일부 임차인은 전세금을 마련하기 위해 전세 대출을 받을 수 있습니다.<br>만약 임대인이 전세금을 반환하지 않을 경우, 임차인은 법적 조치를 취할 수 있습니다<br>여러 은행과 금융 기관에서 전세 대출 상품을 제공하므로,<br>대출 조건과 이자율을 비교해보는 것이 좋습니다.
+                      </td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">관련 법규</th>
+                      <td>전세 계약 및 관련 사항은 「주택임대차보호법」에 규정되어 있습니다.<br>계약 시 이 법의 내용을 잘 숙지하고, 권리를 보호받는 것이 중요합니다.</td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

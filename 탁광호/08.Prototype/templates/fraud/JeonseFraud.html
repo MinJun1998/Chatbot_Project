@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+
+
+{% block subtitle %}
+    <div style="margin-left: 200px;">전세 사기</div>    
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="left-container" style="position: relative; float: left; width: 200px;">
+        <h3 style="position: relative; left: -40px;">기초사전</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px; ">
+            <ul>
+                <li class="underlined-text"><a href="../dictionary/jeonse">전 세</a></li>
+                <li class="underlined-text"><a href="../dictionary/wolse">월 세</a></li>
+                <li><a href="../dictionary/tip">팁</a></li>
+            </ul>
+        </div>
+        <h3 style="position: relative; left: -40px; top: 30px;">사기유형</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px; top: 30px;">
+            <ul>
+                <li class="underlined-text" style="font-size: 100%;"><a href="camouflagedProperty">허위 매물 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="priceManipulation">가격 조작 사기</a></li>
+                <li class="underlined-text active" style="font-size: 100%;"><a href="#">전세 사기</a></li>
+                <li style="font-size: 100%;"><a href="RentalContract">임대차 계약 사기</a></li>
+            </ul>
+        </div>  
+    </div>
+    <div class="right-container" style="margin-top: 50px;">
+        <div class="col-md-12 mx-auto; row top-div" style="margin-left: 200px; line-height: 1.5; width: 924px; font-weight: 600; font-size: 18px;">
+            <table class="type09">
+                <thead>
+                <tr>
+                  <th scope="cols"></th>
+                  <th scope="cols"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row" rowspan="3" style="text-align: center;">유형</th>
+                  <td>1. 가짜 매물을 게시하고 대체로 저렴한 가격을 약속한다.<br>2. 매물이 인터넷 상에만 존재하고 실물 확인이 어렵다.<br>3. 허위 정보를 제공하여 임대인을 속인다.<br>4. 높은 보증금과 저렴한 월세를 요구한다.</td>
+                </tr>          
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">예방법</th>
+                      <td>1. 정직한 부동산 중개업체나 중개사와 거래하는 것이 중요합니다.<br>2. 공인중개사 등록번호와 상호명이 일치하는지 확인 한다. <a href="http://www.nsdi.go.kr/lxportal/?menuno=4085" target="_blank">국가공간정보포털(바로가기)</a><br>3. 가격이나 조건이 현실적인지 확인하기위해 다른 부동산 전문가와 상의한다.<br>4. 임대 계약서를 세심하게 검토하고, 미리 부당한 조건이나 모호한 내용이 없는지 확인해야 합니다.
+                    </td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">법적 처벌</th>
+                      <td>1. 만약 부동산 전세 사기에 피해를 입었다면, 법적 조치를 취할 수 있습니다.<br>2. 사기꾼을 신고하고 관할 경찰서나 지방 정부 기관에 알려주어야 합니다.</td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

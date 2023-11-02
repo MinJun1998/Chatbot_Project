@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+
+
+{% block subtitle %}
+    <div style="margin-left: 200px;">팁</div>    
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="left-container" style="position: relative; float: left; width: 200px;">
+        <h3 style="position: relative; left: -40px;">기초사전</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px; ">
+            <ul>
+                <li class="underlined-text"><a href="jeonse">전 세</a></li>
+                <li class="underlined-text"><a href="wolse">월 세</a></li>
+                <li class="underlined-text active "><a href="#">팁</a></li>
+            </ul>
+        </div>
+        <h3 style="position: relative; left: -40px; top: 30px;">사기유형</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px; top: 30px;">
+            <ul>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/camouflagedProperty">허위 매물 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/priceManipulation">가격 조작 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/JeonseFraud">전세 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/RentalContract">임대차 계약 사기</a></li>
+            </ul>
+        </div>  
+    </div>
+    <div class="right-container" style="margin-top: 50px;">
+        <div class="col-md-12 mx-auto; row top-div" style="margin-left: 200px; line-height: 1.5; width: 924px; font-weight: 600; font-size: 18px;">
+            <table class="type09">
+                <thead>
+                <tr>
+                  <th scope="cols"></th>
+                  <th scope="cols"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row" rowspan="3" style="text-align: center;">생각 해보기</th>
+                  <td>예산을 세워서 어떤 월세나 전세를 감당할 수 있는지 정확히 파악하세요.</td>
+                </tr>
+                <tr>
+                  <td>월세나 전세금 외에도 보증금, 중개 수수료, 관리비 등 부가적인 비용을 고려하세요.</td>
+                </tr>
+                <tr>
+                  <td>금융 기관과 대출 옵션을 조사하여 금융 준비를 완벽하게 하세요.</td>
+                </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">지역 정하기</th>
+                      <td>원하는 지역을 정확히 선택하세요. 교통, 학군, 생활 편의시설, 안전 등을 고려해야 합니다.</td>
+                    </tr>
+                    <tr>
+                      <td>원하는 지역의 부동산 시장 동향을 파악하고, 가격 범위를 확인하세요.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">매물 찾기</th>
+                      <td>중개사나 부동산 웹사이트, 앱을 활용하여 원하는 매물을 찾으세요.</td>
+                    </tr>
+                    <tr>
+                      <td>중개사를 활용할 경우, 신뢰할 만한 중개사를 선택하고 그들의 조언을 들으세요.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">계약서 쓰기</th>
+                      <td>계약 조건을 주의 깊게 검토하세요. 월세액, 보증금, 입주일 등을 확인하세요.</td>
+                    </tr>
+                    <tr>
+                      <td>계약서에 포함된 모든 조항과 규정을 이해하세요. 불분명한 부분이 없도록 확인하세요.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">협상 하기</th>
+                      <td>가능하다면 월세 또는 전세 조건에 대한 협상을 시도하세요.</td>
+                    </tr>
+                    <tr>
+                      <td>가격, 입주일, 부가 혜택 등을 협상의 대상으로 고려하세요. 협상 중에 신중하게 타협점을 찾으세요.</td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

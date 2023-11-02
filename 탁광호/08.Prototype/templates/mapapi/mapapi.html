@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block additional_body %}
+<div class="container shifted-content" style="margin-top:100px;">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-md-12 mx-auto">
+                    <div id="mapTitle" style="font-size: 30px; font-weight: bold; text-align: center; margin-bottom: 20px;">
+                        <!-- 여기에 맵 타이틀이 표시됩니다 -->
+                    </div>
+                    <div class="outer-container overflow-auto" id="mapContainer" style="height: 500px; position: relative;">
+                        <div id="mapDataContainer">
+                            <!-- 지도 데이터가 이 부분에 로드됩니다 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 1px;">
+                <div class="col-md-12 mx-auto">
+                    <div class="input-group mb-3" style="height: 50px;">
+                        <input type="text" class="form-control custom-input" id="dongInput" onfocus="clearInputField()" onblur="initializeInputField()" placeholder="Enter a dong name" oninput="updateTitle()" onkeydown="submitOnEnter(event)">
+                        <button class="btn btn-success" type="button" onclick="loadMap()">Load Map</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function submitOnEnter(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // 폼이 자동으로 제출되는 것을 방지
+            loadMap();
+        }
+    }
+
+    function updateTitle() {
+        var inputValue = $('#dongInput').val();
+        if (inputValue) {
+            $('#mapTitle').text(inputValue + ' 공인중개사 Map');
+        } else {
+            $('#mapTitle').empty();
+        }
+    }
+
+    function clearInputField() {
+        var dongInput = $('#dongInput');
+        if (dongInput.val() == "Enter a dong name") {
+            dongInput.val('');
+            dongInput.css('opacity', 1);
+        }
+    }
+
+    function initializeInputField() {
+        var dongInput = $('#dongInput');
+        if (dongInput.val() === "") {
+            dongInput.val('Enter a dong name');
+            dongInput.css('opacity', 0.7);
+        }
+    }
+
+    function loadMap() {
+        var dong = $('#dongInput').val();
+        $.get('/mapapi/get_map/' + dong, function(data) {
+            $('#mapDataContainer').html(data.map_html);
+            updateTitle(); // 맵이 로드된 후에도 타이틀을 업데이트
+        });
+    }
+
+    function showDetails(name, address, regno) {
+        alert(`공인중개사 이름: ${name}\n주소: ${address}\n사업자 번호: ${regno}`);
+    }
+
+    
+    $(document).ready(function () {
+        window.copyToClipboard = function (text) {
+            navigator.clipboard.writeText(text).then(function () {
+                console.log('주소가 클립보드로 복사되었습니다.');
+                alert('주소가 클립보드로 복사되었습니다.');
+            }).catch(function (err) {
+                console.error('클립보드로 복사하는데 실패했습니다: ', err);
+                alert('클립보드로 복사하는데 실패했습니다.');
+            });
+        };
+    });
+</script>
+{% endblock %}

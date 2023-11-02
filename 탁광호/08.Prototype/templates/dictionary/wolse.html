@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+
+
+{% block subtitle %}
+    <div style="margin-left: 200px;">월세</div>    
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="left-container" style="position: relative; float: left; width: 200px;">
+        <h3 style="position: relative; left: -40px;">기초사전</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px;">
+          <ul>
+            <li class="underlined-text "><a href="jeonse">전 세</a></li>
+            <li class="underlined-text active"><a href="#">월 세</a></li>
+            <li><a href="tip">팁</a></li>
+          </ul>
+        </div>
+        <h3 style="position: relative; left: -40px; top: 30px;">사기유형</h1>
+        <div class="vertical-nav col-md-2 " style="position: relative; left: -60px; top: 30px;">
+            <ul>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/camouflagedProperty">허위 매물 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/priceManipulation">가격 조작 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/JeonseFraud">전세 사기</a></li>
+                <li class="underlined-text" style="font-size: 100%;"><a href="../fraud/RentalContract">임대차 계약 사기</a></li>
+            </ul>
+        </div>  
+    </div>
+    <div class="right-container" style="margin-top: 50px;">
+        <div class="col-md-12 mx-auto; row top-div" style="margin-left: 200px; line-height: 1.5; width: 924px; font-weight: 600; font-size: 18px;">
+            <table class="type09">
+                <thead>
+                <tr>
+                  <th scope="cols"></th>
+                  <th scope="cols"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row" rowspan="3" style="text-align: center;">월세</th>
+                  <td>월세는 부동산을 임대하는 형태 중 하나로, 임차인이 매월 일정 금액을 임대인에게 지불하는 <br>방식입니다. 이는 주택, 아파트, 상가, 사무실 등 다양한 부동산 유형에 적용됩니다.</td>
+                </tr>          
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">계약 기간</th>
+                      <td>월세 계약은 보통 1년 또는 더 긴 기간으로 체결됩니다.</td>
+                    </tr>
+                    <tr>
+                      <td>임대료와 관련된 조건, 납부일, 인상률 등이 계약서에 명시되어야 합니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">보증금</th>
+                      <td>월세 계약에서 임차인은 임대인에게 보증금을 지불합니다.</td>
+                    </tr>
+                    <tr>
+                      <td>보증금은 월세 계약 종료 시에 임대인이 월세 미납 또는 손해가 발생한 경우에 사용됩니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">임대료</th>
+                      <td>월세액은 매월 임차인이 임대인에게 지불해야 하는 금액을 나타냅니다.</td>
+                    </tr>
+                    <tr>
+                      <td>월세액은 부동산의 위치, 크기, 상태, 시장 조건 등에 따라 다양하게 결정됩니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="4" style="text-align: center;">관리비</th>
+                      <td>일부 월세 계약에는 관리비가 포함되어 있을 수 있습니다.</td>
+                    </tr>
+                    <tr>
+                      <td>관리비는 건물의 유지보수, 청소, 수도, 가스, 전기, 인터넷 등 부가적인 비용을 나타냅니다.</td>
+                    </tr>
+                    <tr>
+                      <td>이러한 정보를 숙지하고 부동산 월세 계약을 체결할 때 계약서를 주의 깊게 검토하는 것이 중요합니다.</td>
+                    </tr>
+                    <tr>
+                      <td>부동산 월세에 관한 규정은 국가 및 지역에 따라 다를 수 있으므로, <br>해당 지역의 법률 및 규정을 따라야 합니다.</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                      <th scope="row" rowspan="3" style="text-align: center;">계약금</th>
+                      <td>전체 보증금의 일부를 미리 지불하며, 나머지는 계약 이행 시 지불됩니다.</td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
