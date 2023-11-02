@@ -1,5 +1,86 @@
 {% extends "base.html" %}
-{% block subtitle %}Home{% endblock %}
-{% block content %}
-    <img src="{{url_for('static', filename='img/home.jpg')}}" width="100%">
+
+{% block additional_body %}
+<img src="{{ url_for('static', filename='img/home.jpg') }}" width="100%" style="margin-top: 80px;">
+<div class="mt-0 ml-0 p-2 bg-white text-black rounded">
+    <style>
+        @font-face{
+            font-family:'DNFBitBitv2';
+            font-style:normal;font-weight:400;src:url('//cdn.df.nexon.com/img/common/font/DNFBitBitv2.otf')format('opentype')}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+    
+        .card-container {
+            display: flex;
+            margin: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .card {
+            border: 1px solid #ccc;
+            margin: 10px;
+            width: 260px;
+            text-align: center;
+            color: black;
+            transition: transform 0.2s ease-in-out;
+            background-color: rgb(115, 207, 250) ;
+        }
+
+        .card:hover{
+            transform: scale(1.05);
+        }
+    
+        .card h3 {
+            margin: 5px;
+            color: rgb(65, 85, 43);
+            font-family: 'DNFBitBitv2', sans-serif;
+        }
+    
+        .card p {
+            margin: 5px;
+            font-size: 23px;
+            color: white;
+            font-family: 'DNFBitBitv2', sans-serif;
+        }
+
+        .main-text{
+            font-family: 'DNFBitBitv2', sans-serif;
+            text-align: center;
+        }
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <h1 class="main-text" style="margin-top: 15px;" >서울 사회초년생들을 위한 부동산 챗봇 "OLIM" 입니다.</h1>
+    <body>
+        <div class="card-container">
+            <a class="card" href="chatbot/counsel">
+                <h3>올림이</h3>
+                <p>당신의 궁금한 것을<br>해결해 주는 채팅 로봇</p>
+            </a>
+            <a class="card" href="dictionary/jeonse">
+                <h3>기초사전</h3>
+                <p>부동산 초보를 위한<br>필수 지식</p>
+            </a>
+            <a class="card" href="fraud/camouflagedProperty">
+                <h3>사기유형</h3>
+                <p>눈뜨고 코베이지<br>않을려면 필독</p>
+            </a>
+            <a class="card" href="mapapi/mapapi">
+                <h3>공인중개사MAP</h3>
+                <p>원하는 동네의 부동산은<br>여기서 검색</p>
+            </a>
+        </div>
+    </body>
+        </html>
+        
+
+        
+    </div> 
 {% endblock %}

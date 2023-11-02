@@ -1,100 +1,385 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>{% block title %}Prototype{% endblock %}</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/fdb840a8cc.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<style>
+  <title>{% block title %}Prototype{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/fdb840a8cc.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+    .vertical-nav .underlined-text.active {
+      background-color:rgb(46, 167, 224) !important;
+      color: white;
+    }
+
+    .vertical-nav .underlined-text.active a {
+      text-decoration: none;
+      color: white;
+    }
+    
+
+
+    #dropdown {
+      display: none;
+    }
+    
+    
+    .custom-margin-right {
+      margin-right: 50px;
+    }
+
+
+    .popup-content-wrapper {
+        max-width: 300px; /* 팝업의 최대 너비를 조정하세요 */
+    }
+    .popup-content {
+        white-space: nowrap; /* 팝업 내용이 한 줄로 나타나게 합니다 */
+    }
+   
+   
     * { font-family: 'Noto Sans KR', sans-serif; }
     a { text-decoration: none; }
+      /*
     .outer-container {
         border: 2px solid #000;
         padding: 10px;
-        border-radius: 20px; /* 조절 가능한 값 */
+        border-radius: 20px; */ /* 조절 가능한 값 */
+    /*}
+    */
+
+    #container hr {
+        border-top: 0px solid #ccc;
+        border-width: 0px;
+        border-style: solid;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
+
     .input-group input[placeholder] {
-    opacity: 0.8; /* 투명도 조절 */
+        opacity: 0.8; /* 투명도 조절 */
     }
     .bold-text {
-    font-weight: bold;
+        font-weight: bold;
     }
-
     .custom-input {
-    border: 2px solid #000;
+        border: 2px solid #000;
     }
-
     .resizable {
-            border: 1px solid #000;
+        border: 1px solid #000;
+    }
+    #sidebar {
+        transition: transform 0.3s ease-in-out;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        background-color: white;
+        padding-top: 60px; /* 나브바 높이만큼 여백을 주어야 함 */
+        z-index: 1030;
+        padding: 20px;
+        box-shadow: 2px 0px 5px rgba(0,0,0,0.1);
+    }
+    #sidebar.collapsed {
+        transform: translateX(-100%);
+    }
+    #closeSidebarBtn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    .shifted-content {
+        transition: margin-left 0.3s ease-in-out;
+    }
+    .shifted-content.sidebar-open {
+        margin-left: 250px;
+    }
+    .navbar-light.bg-light {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* 아래쪽 테두리 추가 */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    }
+    .navbar {
+        padding-bottom: 20px; /* 혹은 원하는 크기로 조절 */
+    }
+    
+    .bg-success {
+      background-color: rgb(46, 167, 224) !important;
     }
 
+    .btn-success {
+      background-color: rgb(46, 167, 224) !important;
+      border-color: rgb(46, 167, 224) !important; /* 보더 색상도 변경하려면 */
+    }
 
-</style>
+    .custom-margin {
+      margin-left: 6rem; /* 원하는 값으로 설정 */
+    }
 
-    <script src="{{url_for('static', filename='js/ajax.js')}}"></script>
-    {% block addtional_head %}{% endblock %}
+    
+table.type09 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+  
+  }
+  table.type09 thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+  }
+  table.type09 tbody th {
+    width: 70px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+    text-align: center;
+    vertical-align: middle;
+  }
+  table.type09 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+  }
+  .underlined-text {
+      border-bottom: 1px solid #c4c2c2;
+      padding-bottom: 5px;
+  }
+  .vertical-nav {
+      width: 140px; /* 탐색 바의 너비 조절 */
+      background-color: #fff;
+  }
+
+  .vertical-nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+  }
+
+  .vertical-nav li {
+      font-weight: 600;
+      font-size: 100%;
+      padding: 0px;
+      text-align: center;
+  }
+
+  .vertical-nav a {
+      text-decoration: none;
+      color: #070707;
+      display: block;
+      padding: 10px;
+  }
+
+  .vertical-nav a:hover {
+      background-color: #82c8f0;
+  }
+
+  .top-div {
+      position: relative;
+      top: -440px; /* 원하는 만큼 위로 올릴 값, 음수 값은 위로 이동시킵니다. */
+  }
+
+  .top-div2 {
+      position: relative;
+      top: 44px; /* 원하는 만큼 위로 올릴 값, 음수 값은 위로 이동시킵니다. */
+      left: -15px;
+  }
+
+
+  </style>
+  <script src="{{url_for('static', filename='js/ajax.js')}}"></script>
+  {% block addtional_head %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm bg-success navbar-success fixed-top">
-        <div class="container-fluid">
-            <ul class="navbar-nav">
-                <a class="navbar-brand mx-5" href="#"><img src="{{url_for('static', filename='data/ck-logo.png')}}" height="36"></a>
-                                
-                
-                <li class="nav-item dropdown ms-3">
-                    <a class="nav-link dropdown-toggle {% if menu.cb %}active{% endif %}" href="#" data-bs-toggle="dropdown">
-                        <i class="fa-solid fa-brain"></i> 챗봇
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/chatbot/counsel">심리상담</a></li>
-                        <li><a class="dropdown-item" href="/chatbot/bard">구글 바드</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/chatbot/genImg">이미지 생성</a></li>
-                    </ul>
-                </li>
-                
-                
-            </ul>
-            <span class="navbar-text me-3">
-                {% if session['uid'] %}
-                    {{ session['uname'] }}님 환영합니다.
-                {% endif %}
-            </span>
-        </div>
-    </nav>
+  
+  <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shifted-content">
+    <div class="container-fluid">
+      <button class="btn btn-light" id="toggleBtn" style="position: fixed; z-index: 1031; left: 10px; top: 15px;">
+        <img src="{{ url_for('static', filename='img/news2.png') }}" alt="Toggle" style="width: 40px; height: 20px;">
+      </button>
+      <ul class="navbar-nav">
+        <li class="nav-item  custom-margin">
+          <a class="nav-link {% if menu.ho %}active{% endif %}" href="{% if menu.ho %}#{% else %}/{% endif %}" style="position: relative; top: 7px;">
+            <img src="{{ url_for('static', filename='img/home2.png') }}" alt="Home" style="width: 20px; height: 20px; ">
+            Home
+          </a>
+        </li>
+        
+        
+        <li class="nav-item ms-3">
+          <a class="nav-link {% if menu.ol %}active{% endif %}" href="/chatbot/counsel" style="position: relative; top: 7px;">
+            <img src="{{ url_for('static', filename='img/chatbot2.png') }}" alt="챗봇" style="width: 20px; height: 20px;">
+            올림이
+          </a>
+        </li>
+        
 
-    <div class="container" style="margin-top:80px">
-        <div class="row">
-            <div class="col-1">
-                
-            </div>
-            <div class="col-9">
-                <h3><strong>{% block subtitle %}{% endblock %}</strong></h3>
-                <hr>
-                {% block content %}{% endblock %}
-            </div>
-        </div>
-    </div>
+        <li class="nav-item dropdown ms-3" for="dropdown-trigger-2" onmouseenter="showDropdown(2)" onmouseleave="hideDropdown(2)" style="position: relative; top: 7px;">
+          <a class="nav-link dropdown-toggle {% if menu.ba %}active{% endif %}" id="dropdown-trigger-2" class="dropdown"  href="#" data-bs-toggle="dropdown">
+            <img src="{{ url_for('static', filename='img/dictionary2.png') }}"  alt="Dictionary" style="width: 20px; height: 20px;">
+            기초사전
+          </a>
+          <ul class="dropdown-menu" id="dropdown-2">
+              <li><a class="dropdown-item" href="/dictionary/jeonse">전세</a></li>
+              <li><a class="dropdown-item" href="/dictionary/wolse">월세</a></li>
+              <li><a class="dropdown-item" href="/dictionary/tip">팁</a></li>
+          </ul>
+        </li>
 
-    <nav class="navbar navbar-expand-sm bg-light fixed-bottom">
-        <div class="container-fluid justify-content-center">
-            <span class="navbar-text">
-                Copyright &copy; 2023 CK World Corp. All rights reserved.
-            </span>
-        </div>
-    </nav>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <script>
-                alert("{{messages[-1]}}");
-            </script>
+        <li class="nav-item dropdown ms-3" for="dropdown-trigger-3" onmouseenter="showDropdown(3)" onmouseleave="hideDropdown(3)" style="position: relative; top: 7px;">
+          <a class="nav-link dropdown-toggle {% if menu.fr %}active{% endif %}" id="dropdown-trigger-3" class="dropdown"  href="#" data-bs-toggle="dropdown">
+            <img src="{{ url_for('static', filename='img/fraud2.png') }}" alt="Fraud" style="width: 20px; height: 20px;">
+            사기유형
+          </a>
+          <ul class="dropdown-menu" id="dropdown-3" >
+            <li><a class="dropdown-item" href="/fraud/camouflagedProperty">허위 매물 사기</a></li>
+            <li><a class="dropdown-item" href="/fraud/priceManipulation">가격 조작 사기</a></li>
+            <li><a class="dropdown-item" href="/fraud/JeonseFraud">전세 사기</a></li>
+            <li><a class="dropdown-item" href="/fraud/RentalContract">임대차 계약 사기</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item ms-3">
+          <a class="nav-link {% if menu.mp %}active{% endif %}" href="/mapapi/mapapi" style="position: relative; top: 7px;">
+            <img src="{{ url_for('static', filename='img/map.png') }}" alt="맵" style="width: 20px; height: 20px;" >
+            공인중개사map
+          </a>
+        </li>
+        
+      </ul>
+      <span class="navbar-text me-3">
+        {% if session['uid'] %}
+          {{ session['uname'] }}님 환영합니다.
         {% endif %}
-    {% endwith %}
-    {% block additional_body %}{% endblock %}
+      </span>
+    </div>
+  </nav>
+  
+
+  <div id="sidebar" class="bg-success collapsed">
+    <img src="{{ url_for('static', filename='img/news3.png') }}" alt="뉴스" id="closeSidebarBtn" style="width: 40px; height: 20px; position: absolute; top: 20px; right: 10px; cursor: pointer;">
+    <ul class="list-group mt-5" id="news_list">
+      <!-- 유지하고자 하는 뉴스 항목 -->
+      <li class="list-group-item">
+        <a id="news_title" href="#" target="_blank"></a>
+        <span id="news_publisher" style="font-size: smaller; margin-left: 10px;"></span>
+      </li>
+      <!-- 여기에 뉴스 목록이 동적으로 삽입됩니다. -->
+    </ul>
+  </div>
+  {% block additional_body %}{% endblock %}
+  <div class="container shifted-content" style="margin-top:100px;">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+         <h3 style="text-align: center; margin-top:30px;"><strong>{% block subtitle %}{% endblock %}</strong></h3>
+        
+        <div class="d-grid justify-content-center">
+          <div class="inner-container">
+            {% block content %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-light fixed-bottom shifted-content">
+    <div class="container-fluid justify-content-center">
+      <span class="navbar-text">
+        Copyright &copy; 2023 ChatBot Olim. All rights reserved.
+      </span>
+    </div>
+  </nav>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <script>
+        alert("{{messages[-1]}}");
+      </script>
+    {% endif %}
+  {% endwith %}
+  
+  <script>
+  $(document).ready(function() {
+      // 사이드바 토글 버튼
+      $('#toggleBtn, #closeSidebarBtn').click(function() {
+        var $sidebar = $('#sidebar');
+        var $shiftedContent = $('.shifted-content');
+        var $toggleBtnImg = $('#toggleBtn img');
+        var openImgSrc = "{{ url_for('static', filename='img/news2.png') }}";
+        var closedImgSrc = "{{ url_for('static', filename='img/news3.png') }}";
+
+        if($sidebar.hasClass('collapsed')) {
+          $sidebar.removeClass('collapsed');
+          $shiftedContent.addClass('sidebar-open');
+          $toggleBtnImg.attr('src', openImgSrc);
+        } else {
+          $sidebar.addClass('collapsed');
+          $shiftedContent.removeClass('sidebar-open');
+          $toggleBtnImg.attr('src', closedImgSrc);
+        }
+
+        if($(this).is('#closeSidebarBtn')) {
+          $toggleBtnImg.attr('src', openImgSrc);
+        }
+      });
+      $.ajax({
+        url: '/get_news_title',
+        method: 'GET',
+        success: function(data) {
+          $('#news_title').attr('href', data.news_url).text(data.news_title);
+          $('#news_publisher').text(data.news_publisher);
+        }
+      });
+
+      // 뉴스 목록 불러오기
+      $.ajax({
+        url: '/get_news_titles',
+        method: 'GET',
+        success: function(data) {
+          const newsList = $('#news_list');
+          data.news_titles.forEach(function(news) {
+            const listItem = `
+              <li class="list-group-item">
+                <a href="${news.url}" target="_blank">${news.title}</a>
+                <span style="font-size: smaller; margin-left: 10px;">${news.publisher}</span>
+              </li>`;
+            newsList.append(listItem);
+          });
+        }
+      });
+     
+
+
+
+
+      
+  });
+
+    // 드롭다운을 표시하는 함수
+    function showDropdown(dropdownNumber) {
+      var dropdown = document.getElementById('dropdown-' + dropdownNumber);
+      dropdown.style.display = 'block';
+    }
+
+    // 드롭다운을 숨기는 함수
+    function hideDropdown(dropdownNumber) {
+      var dropdown = document.getElementById('dropdown-' + dropdownNumber);
+      dropdown.style.display = 'none';
+    }
+
+    
+
+  </script>
 </body>
 </html>
