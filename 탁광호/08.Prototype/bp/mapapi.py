@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, jsonify, current_app
 import pandas as pd
-import folium
-import os
+import folium, os
+import requests
+
 
 mapapi_bp = Blueprint('mapapi_bp', __name__)
 

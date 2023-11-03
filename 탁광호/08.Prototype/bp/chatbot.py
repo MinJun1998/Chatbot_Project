@@ -57,6 +57,18 @@ def get_welcome_message():
 
     # JSON 형식으로 반환
         return json.dumps(result)
+
+@chatbot_bp.route('/get_info_from_index', methods=['POST'])
+def get_info_from_index():
+    data = request.get_json()
+    index = data.get('index')
+    print('Received index:', index)
+    
+    # 데이터 프레임에서 해당 인덱스의 데이터를 조회하는 코드
+    # 예시: result = df.loc[index]
+    
+    # 조회한 데이터를 응답으로 돌려주기
+    return jsonify({'data': 'some data'})
     
 
 
