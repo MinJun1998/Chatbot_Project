@@ -10,6 +10,20 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/fdb840a8cc.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <!-- Leaflet CSS와 JavaScript 라이브러리 추가 -->
+  <script>
+    $(document).ready(function(){
+      // 문서가 완전히 로드된 후에 실행됩니다.
+      
+      // 동적으로 생성된 요소에 대해서도 이벤트를 처리합니다.
+      $(document).on('click', '.popup-content', function(){
+        console.log('Popup content clicked!');
+        get_content_wrapper(this);
+      });
+    });
+  </script>
+  
   <style>
     .vertical-nav .underlined-text.active {
       background-color:rgb(46, 167, 224) !important;
@@ -122,7 +136,7 @@
     }
 
     
-table.type09 {
+  table.type09 {
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;
@@ -225,7 +239,7 @@ table.type09 {
         
 
         <li class="nav-item dropdown ms-3" for="dropdown-trigger-2" onmouseenter="showDropdown(2)" onmouseleave="hideDropdown(2)" style="position: relative; top: 7px;">
-          <a class="nav-link dropdown-toggle {% if menu.ba %}active{% endif %}" id="dropdown-trigger-2" class="dropdown"  href="#" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle {% if menu.ba %}active{% endif %}" id="dropdown-trigger-2" class="dropdown"  href="#" data-bs-toggle="dropdown" >
             <img src="{{ url_for('static', filename='img/dictionary2.png') }}"  alt="Dictionary" style="width: 20px; height: 20px;">
             기초사전
           </a>
@@ -269,20 +283,16 @@ table.type09 {
   <div id="sidebar" class="bg-success collapsed">
     <img src="{{ url_for('static', filename='img/news3.png') }}" alt="뉴스" id="closeSidebarBtn" style="width: 40px; height: 20px; position: absolute; top: 20px; right: 10px; cursor: pointer;">
     <ul class="list-group mt-5" id="news_list">
-      <!-- 유지하고자 하는 뉴스 항목 -->
-      <li class="list-group-item">
-        <a id="news_title" href="#" target="_blank"></a>
-        <span id="news_publisher" style="font-size: smaller; margin-left: 10px;"></span>
-      </li>
       <!-- 여기에 뉴스 목록이 동적으로 삽입됩니다. -->
     </ul>
+    <img id="waitImg1" class="mt-3" src="{{ url_for('static', filename='img/loading2.gif') }}" style="display: none; max-width: 100%;">
   </div>
   {% block additional_body %}{% endblock %}
   <div class="container shifted-content" style="margin-top:100px;">
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
-         <h3 style="text-align: center; margin-top:30px;"><strong>{% block subtitle %}{% endblock %}</strong></h3>
+         <h3 style="text-align: center; margin-top:10px;"><strong>{% block subtitle %}{% endblock %}</strong></h3>
         
         <div class="d-grid justify-content-center">
           <div class="inner-container">
@@ -333,32 +343,31 @@ table.type09 {
           $toggleBtnImg.attr('src', openImgSrc);
         }
       });
-      $.ajax({
-        url: '/get_news_title',
-        method: 'GET',
-        success: function(data) {
-          $('#news_title').attr('href', data.news_url).text(data.news_title);
-          $('#news_publisher').text(data.news_publisher);
-        }
-      });
+  
 
       // 뉴스 목록 불러오기
       $.ajax({
-        url: '/get_news_titles',
-        method: 'GET',
-        success: function(data) {
-          const newsList = $('#news_list');
-          data.news_titles.forEach(function(news) {
-            const listItem = `
-              <li class="list-group-item">
-                <a href="${news.url}" target="_blank">${news.title}</a>
-                <span style="font-size: smaller; margin-left: 10px;">${news.publisher}</span>
-              </li>`;
-            newsList.append(listItem);
-          });
-        }
+          url: '/get_news_titles',
+          method: 'GET',
+          beforeSend: function() {
+              $('#waitImg1').show();  // 요청 전에 로딩 이미지 표시
+          },
+          success: function(data) {
+              const newsList = $('#news_list');
+              newsList.empty();  // 기존 목록 삭제
+              data.news_titles.forEach(function(news) {
+                  const listItem = `
+                  <li class="list-group-item">
+                      <a href="${news.url}" target="_blank">${news.title}</a>
+                      <span style="font-size: smaller; margin-left: 10px;">${news.publisher}</span>
+                  </li>`;
+                  newsList.append(listItem);
+              });
+          },
+          complete: function() {
+              $('#waitImg1').hide();  // 요청 완료 후에 로딩 이미지 숨김
+          }
       });
-     
 
 
 
@@ -377,6 +386,8 @@ table.type09 {
       var dropdown = document.getElementById('dropdown-' + dropdownNumber);
       dropdown.style.display = 'none';
     }
+    
+    
 
     
 

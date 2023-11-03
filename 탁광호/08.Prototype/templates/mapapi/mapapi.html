@@ -19,9 +19,42 @@
             </div>
             <div class="row" style="margin-top: 1px;">
                 <div class="col-md-12 mx-auto">
-                    <div class="input-group mb-3" style="height: 50px;">
-                        <input type="text" class="form-control custom-input" id="dongInput" onfocus="clearInputField()" onblur="initializeInputField()" placeholder="Enter a dong name" oninput="updateTitle()" onkeydown="submitOnEnter(event)">
-                        <button class="btn btn-success" type="button" onclick="loadMap()">Load Map</button>
+                    <div class="input-group mb-3 center" style="height: 50px;">
+                        <form action="#">
+                            <select id="gu" name="gu" onchange="categoryChange(this)">
+                                <option>구를 선택해주세요</option>
+                                <option value="강남구">강남구</option>
+                                <option value="강동구">강동구</option>
+                                <option value="강북구">강북구</option>
+                                <option value="강서구">강서구</option>
+                                <option value="관악구">관악구</option>
+                                <option value="광진구">광진구</option>
+                                <option value="구로구">구로구</option>
+                                <option value="금천구">금천구</option>
+                                <option value="노원구">노원구</option>
+                                <option value="도봉구">도봉구</option>
+                                <option value="동대문구">동대문구</option>
+                                <option value="동작구">동작구</option>
+                                <option value="마포구">마포구</option>
+                                <option value="서대문구">서대문구</option>
+                                <option value="서초구">서초구</option>
+                                <option value="성동구">성동구</option>
+                                <option value="성북구">성북구</option>
+                                <option value="송파구">송파구</option>
+                                <option value="양천구">양천구</option>
+                                <option value="영등포구">영등포구</option>
+                                <option value="용산구">용산구</option>
+                                <option value="은평구">은평구</option>
+                                <option value="종로구">종로구</option>
+                                <option value="중구">중구</option>
+                                <option value="중랑구">중랑구</option>
+                            </select>
+                            
+                            <select id="dong" name="dong">
+                                <option>동을 선택해주세요</option>
+                            </select>
+                            <button class="btn btn-success" type="button" onclick="loadMap()">Load Map</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -39,40 +72,21 @@
     }
 
     function updateTitle() {
-        var inputValue = $('#dongInput').val();
+        var inputValue = $('#dong').val();
+        var realTitle = ($('#gu').val() + ' ' + $('#dong').val());
         if (inputValue) {
-            $('#mapTitle').text(inputValue + ' 공인중개사 Map');
+            $('#mapTitle').text(realTitle + ' 공인중개사 Map');
         } else {
             $('#mapTitle').empty();
         }
     }
 
-    function clearInputField() {
-        var dongInput = $('#dongInput');
-        if (dongInput.val() == "Enter a dong name") {
-            dongInput.val('');
-            dongInput.css('opacity', 1);
-        }
-    }
-
-    function initializeInputField() {
-        var dongInput = $('#dongInput');
-        if (dongInput.val() === "") {
-            dongInput.val('Enter a dong name');
-            dongInput.css('opacity', 0.7);
-        }
-    }
-
     function loadMap() {
-        var dong = $('#dongInput').val();
+        var dong = $('#dong').val();
         $.get('/mapapi/get_map/' + dong, function(data) {
             $('#mapDataContainer').html(data.map_html);
             updateTitle(); // 맵이 로드된 후에도 타이틀을 업데이트
         });
-    }
-
-    function showDetails(name, address, regno) {
-        alert(`공인중개사 이름: ${name}\n주소: ${address}\n사업자 번호: ${regno}`);
     }
 
     
@@ -87,5 +101,69 @@
             });
         };
     });
+
+    function categoryChange(e) {
+        var good_a = ["동을 선택해주세요", "논현동", "역삼동", "신사동", "도곡동", "대치동", "일원동", "삼성동", "개포동", "압구정동", "자곡동", "세곡동", "청담동", "수서동", "율현동"];
+        var good_b = ["동을 선택해주세요", "암사동", "성내동", "천호동", "상일동", "둔촌동", "길동", "고덕동", "명일동", "강일동"];
+        var good_c = ["동을 선택해주세요", "수유동", "미아동", "우이동", "번동"];
+        var good_d = ["동을 선택해주세요", "등촌동", "방화동", "화곡동", "내발산동", "염창동", "공항동", "가양동", "마곡동", "개화동", "외발산동"];
+        var good_e = ["동을 선택해주세요", "봉천동", "신림동", "남현동"];
+        var good_f = ["동을 선택해주세요", "구의동", "자양동", "군자동", "중곡동", "화양동", "광장동", "능동"];
+        var good_g = ["동을 선택해주세요", "구로동", "항동", "개봉동", "신도림동", "궁동", "오류동", "고척동", "가리봉동", "온수동", "천왕동"];
+        var good_h = ["동을 선택해주세요", "시흥동", "독산동", "가산동"];
+        var good_i = ["동을 선택해주세요", "하계동", "상계동", "중계동", "공릉동", "월계동"];
+        var good_j = ["동을 선택해주세요", "창동", "방학동", "쌍문동", "도봉동"];
+        var good_k = ["동을 선택해주세요", "장안동", "이문동", "청량리동", "신설동", "전농동", "답십리동", "휘경동", "용두동", "제기동", "회기동"];
+        var good_l = ["동을 선택해주세요", "상도1동", "신대방동", "상도동", "흑석동", "사당동", "노량진동", "대방동", "동작동", "본동"];
+        var good_n = ["동을 선택해주세요", "공덕동", "합정동", "도화동", "신수동", "염리동", "망원동", "성산동", "동교동", "서교동", "아현동", "대흥동", "연남동", "현석동", "신공덕동", "노고산동", "상암동", "상수동", "구수동", "용강동", "창전동", "신정동", "마포동", "중동", "토정동", "하중동", "당인동"];
+        var good_m = ["동을 선택해주세요", "충정로3가", "미근동", "영천동", "북가좌동", "북아현동", "남가좌동", "창천동", "홍제동", "홍은동", "충정로2가", "대현동", "연희동", "대신동", "냉천동", "현저동", "천연동", "합동", "봉원동"];
+        var good_o = ["동을 선택해주세요", "방배동", "반포동", "서초동", "양재동", "우면동", "신원동", "내곡동", "잠원동", "원지동", "염곡동"];
+        var good_p = ["동을 선택해주세요", "성수동2가", "행당동", "옥수동", "송정동", "금호동4가", "마장동", "금호동3가", "성수동1가", "도선동", "용답동", "금호동2가", "하왕십리동", "응봉동", "금호동1가", "사근동", "상왕십리동", "홍익동"];
+        var good_q = ["동을 선택해주세요", "보문동2가", "장위동", "석관동", "종암동", "길음동", "돈암동", "동선동4가", "삼선동2가", "하월곡동", "동소문동4가", "상월곡동", "삼선동5가", "보문동6가", "안암동3가", "동소문동1가", "정릉동", "동선동3가", "동선동1가", "동선동5가", "안암동1가", "삼선동4가", "동선동2가", "안암동5가", "성북동", "삼선동3가", "성북동1가", "보문동7가", "동소문동2가", "보문동5가", "동소문동7가", "보문동3가", "동소문동6가", "동소문동5가", "삼선동1가", "안암동4가", "안암동2가", "동소문동3가", "보문동4가", "보문동1가"];
+        var good_r = ["동을 선택해주세요", "문정동", "방이동", "오금동", "장지동", "가락동", "잠실동", "거여동", "신천동", "송파동", "마천동", "석촌동", "풍납동", "삼전동"];
+        var good_s = ["동을 선택해주세요", "목동", "신월동", "신정동"];
+        var good_t = ["동을 선택해주세요", "영등포동8가", "영등포동7가", "여의도동", "문래동6가", "영등포동3가", "양평동1가", "신길동", "양평동5가", "당산동4가", "영등포동2가", "영등포동", "문래동3가", "당산동6가", "양평동3가", "문래동4가", "영등포동5가", "당산동1가", "대림동", "영등포동6가", "당산동5가", "당산동3가", "양평동4가", "당산동2가", "영등포동1가", "영등포동4가", "당산동", "문래동5가", "도림동", "양평동2가", "문래동2가", "문래동1가", "양평동6가"];
+        var good_u = ["동을 선택해주세요", "용산동4가", "용문동", "용산동2가", "한남동", "서계동", "원효로1가", "효창동", "한강로2가", "한강로3가", "한강로1가", "청파동1가", "이태원동", "동자동", "원효로2가", "후암동", "보광동", "이촌동", "문배동", "서빙고동", "산천동", "청파동3가", "용산동5가", "신창동", "청파동2가", "갈월동", "원효로4가", "도원동", "남영동", "동빙고동", "원효로3가", "신계동", "용산동6가"];
+        var good_v = ["동을 선택해주세요", "갈현동", "역촌동", "녹번동", "진관동", "응암동", "수색동", "증산동", "불광동", "신사동", "대조동", "구산동"];
+        var good_w = ["동을 선택해주세요", "평동", "신문로2가", "평창동", "사직동", "내수동", "필운동", "무악동", "구기동", "교남동", "신문로1가", "이화동", "명륜2가", "명륜4가", "혜화동", "홍파동", "창신동", "숭인동", "명륜1가", "관수동", "당주동", "청운동", "종로5가", "인의동", "장사동", "공평동", "교북동", "종로3가", "와룡동", "청진동", "관훈동", "화동", "종로4가", "중학동", "홍지동", "낙원동", "경운동", "신영동", "내자동", "종로6가", "수송동", "관철동", "종로2가", "효제동", "연지동", "명륜3가", "체부동", "돈의동", "연건동", "재동", "누하동", "옥인동", "삼청동", "가회동", "동숭동", "계동", "원서동", "봉익동", "신교동", "종로1가", "예지동", "부암동", "익선동", "충신동", "적선동", "묘동", "통인동", "창성동", "견지동", "통의동", "운니동", "서린동", "효자동", "행촌동", "팔판동", "소격동"];
+        var good_x = ["동을 선택해주세요", "을지로5가", "저동1가", "인현동2가", "북창동", "신당동", "예장동", "묵정동", "초동", "남창동", "충무로2가", "서소문동", "중림동", "광희동2가", "을지로2가", "남대문로5가", "다동", "쌍림동", "명동1가", "남산동2가", "황학동", "을지로3가", "순화동", "명동2가", "필동3가", "오장동", "필동2가", "무교동", "충무로3가", "만리동2가", "을지로6가", "충무로4가", "장충동2가", "흥인동", "을지로4가", "태평로2가", "충무로1가", "장충동1가", "회현동1가", "회현동3가", "광희동1가", "만리동1가", "충정로1가", "주교동", "장교동", "저동2가", "남대문로4가", "태평로1가", "충무로5가", "인현동1가", "수표동", "무학동", "남대문로3가", "회현동2가", "필동1가", "방산동", "을지로1가", "남산동1가", "산림동", "소공동", "수하동", "을지로7가", "입정동"];
+        var good_y = ["동을 선택해주세요", "묵동", "신내동", "면목동", "망우동", "중화동", "상봉동"];
+        var target = document.getElementById("dong");
+    
+        if(e.value == "강남구") var d = good_a;
+        else if(e.value == "강동구") var d = good_b;
+        else if(e.value == "강북구") var d = good_c;
+        else if(e.value == "강서구") var d = good_d;
+        else if(e.value == "관악구") var d = good_e;
+        else if(e.value == "광진구") var d = good_f;
+        else if(e.value == "구로구") var d = good_g;
+        else if(e.value == "금천구") var d = good_h;
+        else if(e.value == "노원구") var d = good_i;
+        else if(e.value == "도봉구") var d = good_j;
+        else if(e.value == "동대문구") var d = good_k;
+        else if(e.value == "동작구") var d = good_l;
+        else if(e.value == "마포구") var d = good_n;
+        else if(e.value == "서대문구") var d = good_m;
+        else if(e.value == "서초구") var d = good_o;
+        else if(e.value == "성동구") var d = good_p;
+        else if(e.value == "성북구") var d = good_q;
+        else if(e.value == "송파구") var d = good_r;
+        else if(e.value == "양천구") var d = good_s;
+        else if(e.value == "영등포구") var d = good_t;
+        else if(e.value == "용산구") var d = good_u;
+        else if(e.value == "은평구") var d = good_v;
+        else if(e.value == "종로구") var d = good_w;
+        else if(e.value == "중구") var d = good_x;
+        else if(e.value == "중랑구") var d = good_y;
+    
+        target.options.length = 0;
+    
+        for (x in d) {
+            var opt = document.createElement("option");
+            opt.value = d[x];
+            opt.innerHTML = d[x];
+            target.appendChild(opt);
+        }
+    }
 </script>
 {% endblock %}
