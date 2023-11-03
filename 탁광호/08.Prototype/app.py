@@ -1,13 +1,15 @@
-from flask import Flask, render_template, request, flash, session
+from flask import Flask, render_template
 from bp.chatbot import chatbot_bp
 from bp.dictionary import dictionary_bp
 from bp.mapapi import mapapi_bp
 from bp.fraud import fraud_bp
-import os, random
-import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+
 
 app = Flask(__name__)
 app.secret_key = 'qwert12345'
@@ -31,57 +33,50 @@ def home():
 
 ##################################################
 
-def get_naver_news_title():
-    url = 'https://land.naver.com/news/'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'
-    }
-    
-    res = requests.get(url, headers=headers)
-    res.raise_for_status()
-    
-    soup = BeautifulSoup(res.text, 'html.parser')
-    naver_newstitle = soup.select_one('.group .news_list dt span').get_text()
-    news_title_tag = soup.select_one('.group .news_list dt a')
-    news_url = news_title_tag['href']
-    news_publisher = soup.select_one('.group>.news_list>dd>.writing').get_text()
-    return naver_newstitle, news_url, news_publisher
 
-
-
-@app.route('/get_news_title')
-def get_news_title():
-    news_title, news_url, news_publisher = get_naver_news_title()
-    return {'news_title': news_title, 'news_url': 'https://land.naver.com/' + news_url, 'news_publisher': news_publisher}
-
-def inject_news_title():
-    news_title = get_naver_news_title()
-    return dict(news_title=news_title)
 
 def get_naver_news_titles():
-    url = 'https://land.naver.com/news/'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'
-    }
+    url = 'https://land.naver.com/news/headline.naver'
     
-    res = requests.get(url, headers=headers)
-    res.raise_for_status()
+    options = Options()
+    options.add_argument("--headless")  # 헤드리스 모드 활성화
+    options.add_argument("--disable-gpu")  # GPU 사용 안 함
+    options.add_argument("--window-size=1920x1080")  # 창 크기 설정
+    options.add_argument("--disable-dev-shm-usage")  # /dev/shm 파티션 사용 안 함
+    options.add_argument("--no-sandbox")  # Sandbox 모드 비활성화
+    options.add_argument("--remote-debugging-port=9222")  # 디버깅 포트 설정
     
-    soup = BeautifulSoup(res.text, 'html.parser')
-    newstitle_list = soup.select('.group2>ul>li')
-    
+    driver = webdriver.Chrome(options=options)
+    driver.get(url)
+
+    # WebDriverWait를 사용하여 뉴스 항목이 로드될 때까지 최대 10초간 기다립니다.
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.land_news_list > li')))
+
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    news_items = soup.select('.land_news_list > li')[:5]
+
     news_data = []
-    for nl in newstitle_list[:5]:  # 리스트의 첫 5개 항목만 처리
-        nl_title = nl.select_one('span').get_text(strip=True)
-        nl_url = 'https://land.naver.com/' + nl.select_one('span>a')['href']
-        nl_publisher = nl.select_one('.writing').get_text(strip=True)
+
+    for news_item in news_items:
+        title = news_item.select_one('.title').get_text(strip=True)
+        publisher = news_item.select_one('.description.source').get_text(strip=True)
+        link = news_item.select_one('a')['href']
         
         news_data.append({
-            'title': nl_title,
-            'url': nl_url,
-            'publisher': nl_publisher
+            'title': title,
+            'publisher': publisher,
+            'url': link
         })
         
+    # 크롤링 결과를 출력합니다.
+    for news in news_data:
+        print("Title:", news['title'])
+        print("Publisher:", news['publisher'])
+        print("URL:", news['url'])
+        print()
+        
+    driver.quit()
     return news_data
 
 @app.route('/get_news_titles')
@@ -89,7 +84,5 @@ def get_news_titles():
     news_titles = get_naver_news_titles()
     return {'news_titles': news_titles}
 
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='192.168.0.66', debug=True)
